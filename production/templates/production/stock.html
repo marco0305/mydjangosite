@@ -1,0 +1,53 @@
+<h2>{{product.pModels}}</h2>
+
+<form action="{% url 'production:stock' product.pNames %}" method="post">
+{% csrf_token %}
+<table class="table" border ="1">
+    <thead>
+        <tr>
+            <th>批號id</th>
+            <th>中文品名</th>
+            <th>庫存數量</th>
+            <th>產品穴號</th>
+            <th>建立時間</th>
+            <th>是否檢驗</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in att %}
+            <tr>
+                <td>{{a.id}}</td>
+                <td>{{product.pNames}}</td>
+                <td>{{a.psNumbers__sum}}</td>
+                <td>{{a.pNotes}}</td>
+                <td>{{a.create_time}}</td>
+            </tr>
+            {% for s in stocks %}
+            {% if s.stockitem_id == a.id %}
+                <tr>
+                    <td>{{s.id}}</td>
+                    <td>{{s.stockitem}}</td>
+                    <td>{{s.psNumbers}}</td>
+                    <td>{{s.pNotes}}</td>
+                    <td>{{s.create_time}}</td>
+                    <td>
+                    {% if s.psChecked is False %}
+                    {{s.psChecked}}<input type='checkbox' name={{s.id}} vlaue={{s.id}}><label for={{s.id}}>檢驗完畢</label>
+                    {% else %}
+                    {{s.psChecked}}
+                    {% endif %}
+                    </td>
+                </tr>{% endif %}
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+<input type="submit" value="狀態更新">
+</form>
+
+<form action="{% url 'production:stock' product.pNames %}" method="post">
+{% csrf_token %}
+{{csf.as_p}}
+<input type="submit" value="OK">
+<input type="reset" value="Clear">
+<input type="reset" value="Go to Index" onclick="location.href='{% url 'production:index' %}'"></form>

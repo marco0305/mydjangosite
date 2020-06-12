@@ -1,0 +1,42 @@
+from django.db import models
+
+import datetime
+# Create your models here.
+
+class Product(models.Model): #建立產品列表
+    #設定產品類別
+    types = (("Plastic Lens", "塑膠鏡片"), ("機構", "機構"), ("Others", "其它"))
+    #設定資料類型
+    pNames = models.CharField(max_length=50, unique=True)
+    pTypes = models.CharField(max_length=50, choices=types)
+    pCaves = models.CharField(max_length=50)
+    pModels = models.CharField(max_length=50, unique=True)
+    create_time = models.DateTimeField("Create_Time:", auto_now=True)
+    
+    def __str__(self):
+        return self.pNames
+
+
+class ProductAttribute(models.Model): 
+    #設定產品屬性，有很多變形可以設置。
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    attCaves = models.CharField(max_length = 5)
+    pNotes = models.CharField(max_length = 200)
+    attID = models.CharField(max_length=20, unique=True, blank = False, null= True)
+    create_time = models.DateTimeField("Create_Time:", auto_now=True)
+
+    def __str__(self):
+        return str(self.product.pNames) + "(" + str(self.attCaves) + ")"
+
+class ProductStocks(models.Model):
+    #設定庫存
+    stockitem = models.ForeignKey(ProductAttribute, on_delete=models.CASCADE)
+    create_time = models.DateTimeField("Create_Time:", auto_now=True)
+    psNumbers = models.IntegerField()
+    psNotes = models.CharField(max_length = 200)
+    psChecked = models.BooleanField(default=False, help_text='是否檢驗', blank=True, null=True)
+    psCheckedDate = models.DateTimeField("Check_Time:", auto_now=False, auto_now_add=False, blank=True, null = True)
+
+    def __str__(self):
+        return self.stockitem.attID
+    

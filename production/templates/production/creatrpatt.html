@@ -1,0 +1,10 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'production:CreateAttribute' %}" method="post">
+{% csrf_token %}
+<label for="your_name">輸入產品訊息</label>
+{{ caf.as_p }}
+<input type="submit" value="OK">
+<input type="reset" value="Clear">
+<input type="reset" value="Go to Index" onclick="location.href='{% url 'production:index' %}'">
+</form>

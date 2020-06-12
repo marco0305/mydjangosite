@@ -1,0 +1,34 @@
+<table class="table" border ="1">
+    <thead>
+        <tr>
+            <th>產品ID</th>
+            <th>產品類型</th>
+            <th>中文品名</th>
+            <th>產品型號</th>
+            <th>產品穴號</th>
+            <th>產品庫存</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in ps %}
+            <tr>
+                <td><a href="{% url 'production:stock' product.pNames %}">{{product.id}}</a></td>
+                <td>{{product.pTypes}}</td>
+                <td><a href="{% url 'production:stock' product.pNames %}">{{product.pNames}}</a></td>
+                <td>{{product.pModels}}</td>
+                <td>{{product.pCaves}}</td>
+                <td>{{product.psNumbers__sum}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'admin:index' %}">Production Administration</a>
+<p></p>
+<form action="createproduct">
+    {% csrf_token %}
+    <input type="submit" value="Create Product">
+</form>
+<form action="CreateAttribute">
+    {% csrf_token %}
+    <input type="submit" value="Create Attribute">
+</form>
