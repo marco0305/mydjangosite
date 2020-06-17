@@ -11,6 +11,8 @@
             <th>產品穴號</th>
             <th>建立時間</th>
             <th>是否檢驗</th>
+            <th>檢驗時間</th>
+            <th>條碼圖片</th>
         </tr>
     </thead>
     <tbody>
@@ -25,18 +27,23 @@
             {% for s in stocks %}
             {% if s.stockitem_id == a.id %}
                 <tr>
-                    <td>{{s.id}}</td>
+                    <td>{{s.stockNumber}}</td>
                     <td>{{s.stockitem}}</td>
                     <td>{{s.psNumbers}}</td>
                     <td>{{s.pNotes}}</td>
                     <td>{{s.create_time}}</td>
                     <td>
                     {% if s.psChecked is False %}
-                    {{s.psChecked}}<input type='checkbox' name={{s.id}} vlaue={{s.id}}><label for={{s.id}}>檢驗完畢</label>
+                    {{s.psChecked}}<input type='checkbox' name="check{{s.id}}" vlaue={{s.id}}><label for={{s.id}}>檢驗完畢</label>
                     {% else %}
                     {{s.psChecked}}
                     {% endif %}
                     </td>
+                    <td>{{s.psCheckedDate|date:"d/m/Y H:i"}}</td>
+                    <!--
+                        DJANGO的網頁時間格式！
+                        https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
+                    -->
                 </tr>{% endif %}
         {% endfor %}
         {% endfor %}

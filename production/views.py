@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from .models import Product, ProductAttribute, ProductStocks
 from django.db.models import Sum
+import datetime
 
 def index(request):
     products = Product.objects.all()
@@ -90,13 +91,17 @@ def stock(request, Product_pNames):
         a = request.POST
         for t in temp:
             for i in a.keys():
-                if str(t.id) == i:
+                if ("check" + str(t.id)) == i:
                     t.psChecked = True
+                    t.psCheckedDate = datetime.datetime.now()
                     t.save()
         #------以下是建立庫存表單分隔線
         csf = CreateSotckForm(request.POST)
         if csf.is_valid():
+            yearmonth = datetime.datetime.now().strftime("%Y%m%d")
+            numbers = str(len(ProductStocks.objects.filter(create_time__month = datetime.datetime.now().month, create_time__year = datetime.datetime.now().year))).zfill(4)
             ProductStocks(
+                stockNumber = yearmonth + numbers,
                 stockitem = csf.cleaned_data['stockitem'],
                 psNumbers = csf.cleaned_data['psNumbers'],
                 psNotes = csf.cleaned_data['psNotes'],
