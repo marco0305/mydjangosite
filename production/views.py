@@ -124,6 +124,6 @@ def stock(request, Product_pNames):
         else:
             print("沒有庫存。")
 
-    return render(request, 'production/stock.html',{'att':att, 'product':product, "stocks": stocks, "csf": csf})
+    return  render(request, 'production/stock.html',{'att':att, 'product':product, "stocks": stocks, "csf": csf})
 
     #TODO:barcode programing

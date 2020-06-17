@@ -22,7 +22,7 @@
                 <td>{{product.pNames}}</td>
                 <td>{{a.psNumbers__sum}}</td>
                 <td>{{a.pNotes}}</td>
-                <td>{{a.create_time}}</td>
+                <td>{{a.create_time|date:"d/m/Y H:i"}}</td>
             </tr>
             {% for s in stocks %}
             {% if s.stockitem_id == a.id %}
@@ -31,7 +31,7 @@
                     <td>{{s.stockitem}}</td>
                     <td>{{s.psNumbers}}</td>
                     <td>{{s.pNotes}}</td>
-                    <td>{{s.create_time}}</td>
+                    <td>{{s.create_time|date:"d/m/Y H:i"}}</td>
                     <td>
                     {% if s.psChecked is False %}
                     {{s.psChecked}}<input type='checkbox' name="check{{s.id}}" vlaue={{s.id}}><label for={{s.id}}>檢驗完畢</label>

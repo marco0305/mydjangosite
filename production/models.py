@@ -32,7 +32,7 @@ class ProductStocks(models.Model):
     #設定庫存
     stockNumber = models.IntegerField(unique=True)
     stockitem = models.ForeignKey(ProductAttribute, on_delete=models.CASCADE)
-    create_time = models.DateTimeField("Create_Time:", auto_now=True)
+    create_time = models.DateTimeField("Create_Time:", auto_now=False, auto_now_add=True)
     psNumbers = models.IntegerField()
     psNotes = models.CharField(max_length = 200)
     psChecked = models.BooleanField(default=False, help_text='是否檢驗', blank=True, null=True)
