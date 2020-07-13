@@ -1,0 +1,38 @@
+[33mcommit f0db16de5b04e277def90ae472730526042d0c17[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: marco0305 <smallflower0305@gmail.com>
+Date:   Wed Jun 17 16:36:23 2020 +0800
+
+    commit
+
+[33mcommit 2c6063785c41e64efde84fce4548ed936cfafbb4[m
+Author: marco0305 <smallflower0305@gmail.com>
+Date:   Wed Jun 17 16:36:05 2020 +0800
+
+    commit
+
+[33mcommit f5010bf494d28c9640cce70e1b0be448931cbdc3[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: 6fd12bf 56afbab
+Author: marco0305 <smallflower0305@gmail.com>
+Date:   Fri Jun 12 10:51:42 2020 +0800
+
+    Merge branch 'master' of https://github.com/marco0305/mydjangosite
+
+[33mcommit 6fd12bf267aea019c7d0a996666768ac5359196c[m
+Author: marco0305 <smallflower0305@gmail.com>
+Date:   Fri Jun 12 10:40:37 2020 +0800
+
+            new file:   .vscode/launch.json
+            new file:   .vscode/settings.json
+            new file:   db.sqlite3
+
+[33mcommit 56afbab79133fcfce23ab4f0188ae22f935e9d9d[m
+Author: Marco Chang <smallflower0305@gmail.com>
+Date:   Fri Jun 12 09:41:28 2020 +0800
+
+    Create README.md
+
+[33mcommit 7c6670625bbf517defda5c2743daae2eac9a1a0b[m
+Author: Marco Chang <smallflower0305@gmail.com>
+Date:   Fri Jun 12 08:26:53 2020 +0800
+
+    Add files via upload
