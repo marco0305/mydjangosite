@@ -20,7 +20,6 @@ def index(request):
             though it provides solutions to most issues if you can crack it.
             '''
             stock = ProductStocks.objects.filter(stockitem__in = ProductAttribute.objects.filter(product_id = x.id)).aggregate(Sum('psNumbers'))
-            print(stock.values())
             temp = products.values()[a]
             ps.append(temp)
             a = a + 1
@@ -95,6 +94,12 @@ def stock(request, Product_pNames):
                     t.psChecked = True
                     t.psCheckedDate = datetime.datetime.now()
                     t.save()
+                elif ("shipped" + str(t.id)) == i:
+                    t.psShipped = True
+                    t.psShippedDate = datetime.datetime.now()
+                    t.save()
+
+
         #------以下是建立庫存表單分隔線
         csf = CreateSotckForm(request.POST)
         if csf.is_valid():
@@ -106,6 +111,7 @@ def stock(request, Product_pNames):
                 psNumbers = csf.cleaned_data['psNumbers'],
                 psNotes = csf.cleaned_data['psNotes'],
                 psChecked = csf.cleaned_data['psChecked'],
+                psShipped = csf.cleaned_data['psShipped'],
             ).save()
         csf = CreateSotckForm()
     
@@ -122,6 +128,7 @@ def stock(request, Product_pNames):
         if stocks.exists():
             print("正常運作。")
         else:
+            stocks = {}
             print("沒有庫存。")
 
     return  render(request, 'production/stock.html',{'att':att, 'product':product, "stocks": stocks, "csf": csf})

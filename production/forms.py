@@ -20,3 +20,5 @@ class CreateSotckForm(forms.Form):
     psNotes = forms.CharField(max_length = 200)
     psChecked = forms.BooleanField(required=False)
     psCheckedDate = forms.DateTimeField(required=False)
+    psShipped = forms.BooleanField(required=False)
+    psShippedDate = forms.DateTimeField(required=False)

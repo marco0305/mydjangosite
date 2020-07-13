@@ -1,5 +1,4 @@
 <h2>{{product.pModels}}</h2>
-
 <form action="{% url 'production:stock' product.pNames %}" method="post">
 {% csrf_token %}
 <table class="table" border ="1">
@@ -12,6 +11,8 @@
             <th>建立時間</th>
             <th>是否檢驗</th>
             <th>檢驗時間</th>
+            <th>是否出貨</th>
+            <th>出貨時間</th>
             <th>條碼圖片</th>
         </tr>
     </thead>
@@ -30,7 +31,7 @@
                     <td>{{s.stockNumber}}</td>
                     <td>{{s.stockitem}}</td>
                     <td>{{s.psNumbers}}</td>
-                    <td>{{s.pNotes}}</td>
+                    <td>{{s.psNotes}}</td>
                     <td>{{s.create_time|date:"d/m/Y H:i"}}</td>
                     <td>
                     {% if s.psChecked is False %}
@@ -44,6 +45,14 @@
                         DJANGO的網頁時間格式！
                         https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date
                     -->
+                    <td>
+                    {% if s.psShipped is False %}
+                    {{s.psShipped}}<input type='checkbox' name="shipped{{s.id}}" vlaue={{s.id}}><label for={{s.id}}>出貨完畢</label>
+                    {% else %}
+                    {{s.psShipped}}
+                    {% endif %}
+                    </td>
+                    <td>{{s.psShippedDate|date:"d/m/Y H:i"}}</td>
                 </tr>{% endif %}
         {% endfor %}
         {% endfor %}

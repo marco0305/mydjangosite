@@ -37,8 +37,17 @@ class ProductStocks(models.Model):
     psNotes = models.CharField(max_length = 200)
     psChecked = models.BooleanField(default=False, help_text='是否檢驗', blank=True, null=True)
     psCheckedDate = models.DateTimeField("Check_Time:", auto_now=False, auto_now_add=False, blank=True, null = True)
+    psShipped = models.BooleanField(default=False, help_text='是否出貨', blank=True, null=True)
+    psShippedDate = models.DateTimeField("Check_Time:", auto_now=False, auto_now_add=False, blank=True, null = True)
     #barCodeImg = models.ImageField(upload_to='uploads/', height_field=None, width_field=None, max_length=None, blank=True)
 
     def __str__(self):
         return self.stockitem.attID
     
+class injection_mold_output(models.Model):
+    imo_date = models.DateField()
+    line = (("#1","GR-M02-11-1"), ("#2","GR-M02-11-2"), ("#3","GR-M02-11-3"))
+    imo_line = models.CharField(max_length= 10, choices = line)
+    imo_date = models.DateTimeField(auto_now=False, auto_now_add=False)    
+    imo_quantity = models.IntegerField()
+    #imo_responsor = 
