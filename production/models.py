@@ -22,7 +22,7 @@ class ProductAttribute(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     attCaves = models.CharField(max_length = 5)
     pNotes = models.CharField(max_length = 200)
-    attID = models.CharField(max_length=20, unique=True, blank = False, null= True)
+    attID = models.CharField(max_length=30, unique=True, blank = False, null= True)
     create_time = models.DateTimeField("Create_Time:", auto_now=True)
 
     def __str__(self):
