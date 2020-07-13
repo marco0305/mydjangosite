@@ -25,6 +25,12 @@ SECRET_KEY = '4uy7w!yln*i5hz&6!-!=r_x20a9s2w@(hp#(^8*&y2y9@oi9c$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#///Marco Edited.///
+if 'DYNO' in os.environ:    #Running on Heroku
+    DEBUG = True
+#//////////
+
+
 ALLOWED_HOSTS = []
 
 
@@ -74,13 +80,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG: #Running on the development environment.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
-
+else: #Running on Heroku
+    # Parse database configureation from $DATABASE_URL
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
+    # Honr the 'X-Forwarded-Proto' header for request.is_secure()
+    SECRET_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -119,3 +131,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#For Heroku delployment
+STATIC_ROOT = 'staticfiles'
