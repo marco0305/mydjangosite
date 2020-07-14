@@ -112,8 +112,8 @@ def stock(request, Product_pNames):
                 stockitem = csf.cleaned_data['stockitem'],
                 psNumbers = csf.cleaned_data['psNumbers'],
                 psNotes = csf.cleaned_data['psNotes'],
-                psChecked = csf.cleaned_data['psChecked'],
-                psShipped = csf.cleaned_data['psShipped']
+                #psChecked = csf.cleaned_data['psChecked'],
+                #psShipped = csf.cleaned_data['psShipped']
             ).save()
         csf = CreateSotckForm()
     
