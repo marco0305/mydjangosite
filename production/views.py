@@ -102,6 +102,7 @@ def stock(request, Product_pNames):
 
         #------以下是建立庫存表單分隔線
         csf = CreateSotckForm(request.POST)
+        
         if csf.is_valid():
             yearmonth = datetime.datetime.now().strftime("%Y%m%d")
             numbers = str(len(ProductStocks.objects.filter(create_time__month = datetime.datetime.now().month, create_time__year = datetime.datetime.now().year))).zfill(4)
