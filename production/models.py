@@ -31,7 +31,7 @@ class ProductAttribute(models.Model):
 class ProductStocks(models.Model):
     #設定庫存
     #stockNumber = models.IntegerField(unique=True)
-    stockNumber = models.BigIntegerField(unique=True)
+    stockNumber = models.CharField(max_length=50, unique=True)
     stockitem = models.ForeignKey(ProductAttribute, on_delete=models.CASCADE)
     create_time = models.DateTimeField("Create_Time:", auto_now=False, auto_now_add=True)
     psNumbers = models.IntegerField()
