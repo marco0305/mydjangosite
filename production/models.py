@@ -34,7 +34,7 @@ class ProductStocks(models.Model):
     stockNumber = models.CharField(max_length=50, unique=True)
     stockitem = models.ForeignKey(ProductAttribute, on_delete=models.CASCADE)
     create_time = models.DateTimeField("Create_Time:", auto_now=False, auto_now_add=True)
-    psNumbers = models.IntegerField()
+    psNumbers = models.BigIntegerField()
     psNotes = models.CharField(max_length = 200)
     psChecked = models.BooleanField(default=False, help_text='是否檢驗', blank=True, null=True)
     psCheckedDate = models.DateTimeField("Check_Time:", auto_now=False, auto_now_add=False, blank=True, null = True)
