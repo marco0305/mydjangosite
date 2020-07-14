@@ -28,8 +28,8 @@ DEBUG = True
 
 #///Marco Edited.///
 if 'DYNO' in os.environ:    #Running on Heroku
-    #DEBUG = False
-    DEBUG = True
+    DEBUG = False
+    #DEBUG = True
 #//////////
 
 
