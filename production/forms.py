@@ -14,10 +14,10 @@ class CreateAttributeForm(forms.Form):
     pNotes = forms.CharField(max_length = 200)
 
 class CreateSotckForm(forms.Form):
-    stockitem = forms.ModelChoiceField(queryset = ProductAttribute.objects.all())
+    stockitem = forms.ModelChoiceField(queryset = ProductAttribute.objects.all(), label = "產品名稱")
     #create_time = forms.DateTimeField(auto_now=True)
-    psNumbers = forms.IntegerField()
-    psNotes = forms.CharField(max_length = 200)
+    psNumbers = forms.IntegerField(label = "包裝數量")
+    psNotes = forms.CharField(max_length = 200, label = "備註")
     #psChecked = forms.BooleanField(required=False)
     #psCheckedDate = forms.DateTimeField(required=False)
     #psShipped = forms.BooleanField(required=False)
