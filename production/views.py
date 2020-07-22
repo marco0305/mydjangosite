@@ -67,6 +67,14 @@ def CreateAttribute(request):
 
     return render(request, 'production/creatrpatt.html', {"caf": caf})
 
+import barcode
+from barcode.writer import ImageWriter
+
+def batCodeSvgGenerator(stockNumber):
+    EAN = barcode.get_barcode_class('ean13')
+    ean = EAN(stockNumber, writer=ImageWriter())
+    ean.save("media\\uploads\\" + str(stockNumber))
+    return "media\\uploads\\" + str(stockNumber) + ".png"
 
 def stock(request, Product_pNames):
     product = Product.objects.get(pNames = Product_pNames)
@@ -106,7 +114,7 @@ def stock(request, Product_pNames):
         if csf.is_valid():
             yearmonth = datetime.datetime.now().strftime("%Y%m%d")
             numbers = str(len(ProductStocks.objects.filter(create_time__month = datetime.datetime.now().month, 
-            create_time__year = datetime.datetime.now().year))).zfill(4)
+            create_time__year = datetime.datetime.now().year))).zfill(2)
             ProductStocks(
                 stockNumber = yearmonth + numbers,
                 stockitem = csf.cleaned_data['stockitem'],
@@ -114,6 +122,8 @@ def stock(request, Product_pNames):
                 psNotes = csf.cleaned_data['psNotes'],
                 #psChecked = csf.cleaned_data['psChecked'],
                 #psShipped = csf.cleaned_data['psShipped']
+                #barCodeSvg = batCodeSvgGenerator(yearmonth + numbers)
+                barCodeImg = batCodeSvgGenerator(yearmonth + numbers)
             ).save()
         csf = CreateSotckForm()
     
@@ -136,3 +146,10 @@ def stock(request, Product_pNames):
     return  render(request, 'production/stock.html',{'att':att, 'product':product, "stocks": stocks, "csf": csf})
 
     #TODO:barcode programing
+
+def stockdetail(request, Product_pNames, ProductStocks_stockNumber):
+    pNames = Product_pNames
+    stockNumber = ProductStocks_stockNumber
+    output = ProductStocks.objects.filter(stockNumber = stockNumber)
+    return render(request, 'production/stockdetail.html', {'output': output})
+    

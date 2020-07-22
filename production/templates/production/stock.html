@@ -1,6 +1,7 @@
 <h2>{{product.pModels}}</h2>
 <form action="{% url 'production:stock' product.pNames %}" method="post">
 {% csrf_token %}
+{% load static %}
 <table class="table" border ="1">
     <thead>
         <tr>
@@ -28,7 +29,7 @@
             {% for s in stocks %}
             {% if s.stockitem_id == a.id %}
                 <tr>
-                    <td>{{s.stockNumber}}</td>
+                    <td><a href="{% url 'production:stockdetail' product.pNames s.stockNumber %}">{{s.stockNumber}}</a></td>
                     <td>{{s.stockitem}}</td>
                     <td>{{s.psNumbers}}</td>
                     <td>{{s.psNotes}}</td>
@@ -53,6 +54,7 @@
                     {% endif %}
                     </td>
                     <td>{{s.psShippedDate|date:"d/m/Y H:i"}}</td>
+                    <td><img src="{{ s.barCodeImg }}" alt=""></td>
                 </tr>{% endif %}
         {% endfor %}
         {% endfor %}

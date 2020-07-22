@@ -1,0 +1,13 @@
+{% load static %}
+<body data-media-url="{% get_media_prefix %}">
+{% for p in output %}
+<p>stockNumber: {{p.stockNumber}}</p>
+<p>stockitem: {{p.stockitem}}</p>
+<p>psNumbers: {{p.psNumbers}}</p>
+<p>psNotes: {{p.psNotes}}</p>
+<p>psChecked: {{p.psChecked}}</p>
+<p>psCheckedDate: {{p.psCheckedDate}}</p>
+<p>barCodeImg: {{p.barCodeImg}}</p>
+<p><img src="{{p.barCodeImg.url}}"></p>
+{% endfor %}
+</body>

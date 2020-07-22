@@ -41,7 +41,8 @@ class ProductStocks(models.Model):
     psCheckedDate = models.DateTimeField("Check_Time:", auto_now=False, auto_now_add=False, blank=True, null = True)
     psShipped = models.BooleanField(default=False, help_text='是否出貨', blank=True, null=True)
     psShippedDate = models.DateTimeField("Check_Time:", auto_now=False, auto_now_add=False, blank=True, null = True)
-    #barCodeImg = models.ImageField(upload_to='uploads/', height_field=None, width_field=None, max_length=None, blank=True)
+    barCodeImg = models.ImageField(upload_to='uploads/', height_field=None, width_field=None, max_length=None, blank=True)
+    batCodeSvg = models.TextField(null=True)
 
     def __str__(self):
         return self.stockitem.attID
